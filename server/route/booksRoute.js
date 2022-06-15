@@ -8,7 +8,9 @@ router.get('/books', async function (req, res) {
 });
 
 router.get('/books/:id', async function (req, res) {
-
+    const idBook = req.params.id;
+    const book = await booksService.getBook(idBook);
+    res.json(book);
 });
 
 router.post('/books', async function (req, res) {
