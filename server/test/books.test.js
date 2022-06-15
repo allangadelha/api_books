@@ -29,7 +29,7 @@ test('Will save books', async function () {
     const book = response.data;
     expect(book.title).toBe(data.title);
     expect(book.author).toBe(data.author);
-    await booksService.deleteBook(data.id);
+    await booksService.deleteBook(book.id);
 });
 
 test('Will update a books', async function () {
@@ -39,6 +39,13 @@ test('Will update a books', async function () {
     await request(`http://localhost:3000/books/${book.id}`, 'put', book);
     const updatedBook = await booksService.getBook(book.id);
 	expect(updatedBook.title).toBe(book.title);
-	expect(updatedBook.content).toBe(book.content);
-	await booksService.deleteBook(book.id);
+	expect(updatedBook.author).toBe(book.author);
+    await booksService.deleteBook(book.id);
+});
+
+test('Will delete a books', async function () {
+    const book = await booksService.saveBook({ title: 'Livro 01', author: 'Autor 01', pages: 150, edition: 2, publication_date: new Date(), rented: true})
+    await request(`http://localhost:3000/books/${book.id}`, 'delete', book);
+    const updatedBook = await booksService.getBooks();
+    await booksService.deleteBook(book.id);
 });
