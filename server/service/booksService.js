@@ -21,12 +21,18 @@ exports.saveBook = async function (book) {
 };
 
 exports.deleteBook = async function (id) {
-    await exports.getBook(id);
+    const book = await exports.getBook(id);
+    if(book.rented === true){
+        throw new Error('Book rented.');
+    }
     return booksData.deleteBook(id);
 };
 
 exports.updateBook = async function (id, book) {
-    await exports.getBook(id);
+    const rentedBook = await exports.getBook(id);
+    if(rentedBook.rented === true){
+        throw new Error('Book rented.');
+    }
     return booksData.updateBook(id, book);
 };
 
