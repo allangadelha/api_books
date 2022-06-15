@@ -16,6 +16,7 @@ test('Will get books', async function () {
     const book2 = await booksService.saveBook({ title: 'Livro 02', author: 'Autor 02', pages: 190, edition: 2, publication_date: new Date(), rented: false})
     const book3 = await booksService.saveBook({ title: 'Livro 03', author: 'Autor 03', pages: 100, edition: 2, publication_date: new Date(), rented: true})
     const response = await request('http://localhost:3000/books', 'get');
+    expect(response.status).toBe(200);
 	const books = response.data;
 	expect(books).toHaveLength(3);
 	await booksService.deleteBook(book1.id);
@@ -26,6 +27,7 @@ test('Will get books', async function () {
 test('Will save books', async function () {
     const data = { title: 'Livro 01', author: 'Autor 01', pages: 150, edition: 2, publication_date: new Date(), rented: true};
     const response = await request('http://localhost:3000/books', 'post', data);
+    expect(response.status).toBe(201);
     const book = response.data;
     expect(book.title).toBe(data.title);
     expect(book.author).toBe(data.author);
@@ -36,7 +38,8 @@ test('Will update a books', async function () {
     const book = await booksService.saveBook({ title: 'Livro 01', author: 'Autor 01', pages: 150, edition: 2, publication_date: new Date(), rented: true})
     book.title = "Livro 1.5";
     book.author = "Autor 1.5";
-    await request(`http://localhost:3000/books/${book.id}`, 'put', book);
+    const response = await request(`http://localhost:3000/books/${book.id}`, 'put', book);
+    expect(response.status).toBe(204);
     const updatedBook = await booksService.getBook(book.id);
 	expect(updatedBook.title).toBe(book.title);
 	expect(updatedBook.author).toBe(book.author);
@@ -45,7 +48,8 @@ test('Will update a books', async function () {
 
 test('Will delete a books', async function () {
     const book = await booksService.saveBook({ title: 'Livro 01', author: 'Autor 01', pages: 150, edition: 2, publication_date: new Date(), rented: true})
-    await request(`http://localhost:3000/books/${book.id}`, 'delete', book);
+    const response = await request(`http://localhost:3000/books/${book.id}`, 'delete', book);
+    expect(response.status).toBe(204);
     const updatedBook = await booksService.getBooks();
     await booksService.deleteBook(book.id);
 });
