@@ -43,8 +43,6 @@ router.put('/books/:id', async function (req, res) {
 
 router.patch('/books/:id', async function (req, res) {
     const book = req.body;
-    console.log("book: ", book);
-    console.log("id book: ", req.params.id);
     try {
         await booksService.updateRentedBook(req.params.id, book);
         res.status(200).json(book);

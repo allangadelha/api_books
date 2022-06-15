@@ -1,7 +1,7 @@
 const database = require('../infra/database');
 
 exports.getBooks = function () {
-    return database.query('select * from library.books');
+    return database.query('select * from library.books order by id');
 };
 
 exports.getBook = function (id) {
