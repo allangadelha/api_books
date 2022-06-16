@@ -27,3 +27,9 @@ exports.updateBook = function (id, book) {
 exports.updateRentedBook = function (id, book) {
     return database.none('update library.books set rented = $1 where id = $2', [book.rented, id]);
 };
+
+exports.login = function (user) {
+    return database.oneOrNone('select * from library.users where email = $1 and password = $2', [user.email, user.password]);
+};
+
+
