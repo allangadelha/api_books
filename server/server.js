@@ -4,6 +4,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use('/', require('./route/loginRoute'));
 app.use('/', require('./route/booksRoute'));
 
 app.get('/', (req, res) => {
