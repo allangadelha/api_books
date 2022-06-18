@@ -13,6 +13,8 @@ Conexão com PostgreSQL (usei a versão 10);
 
 Node.js (usei a versão 16.14.0);
 
+Docker e Docker Compose (caso queira executar utilizando o Docker);
+
 Bibliotecas:
 
     axios(versão 0.21.1);    
@@ -40,10 +42,19 @@ Instalar dependências:
 npm install
 ```
 
-Para a aplicação rodar:
+🚀 Como executar:
+
+
+A partir do ambiente local:
 
 ```
 npm run dev
+```
+
+A partir do Docker:
+
+```
+docker-composer up -d
 ```
 
 ## ⚙️ Executando os testes
@@ -58,13 +69,13 @@ npm test
 
 Foram criados testes para:
 
-### listar todos os livros;
+#### listar todos os livros;
 
-### retornar um livro por ID;
+#### retornar um livro por ID;
 
-### editar um livro por ID;
+#### editar um livro por ID;
 
-### remover um livro por ID;
+#### remover um livro por ID;
 
 ## 📦 Desenvolvimento
 
