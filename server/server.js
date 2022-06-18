@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
     res.status(200).send('Bem vindo a API de livros com Node e PostgreSQL');
 });
 
-app.use(function (error, req, res, next) {
+app.use((error, req, res, next) => {
 	if (error.message === 'Book already exists.') {
 		return res.status(409).send(error.message);
 	}

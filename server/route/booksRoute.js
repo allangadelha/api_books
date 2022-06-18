@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 
 const jwt = require('jsonwebtoken');
 
-router.get('/books', auth, async function (req, res,next) {
+router.get('/books', auth, async (req, res,next) => {
     try{
         const books = await booksService.getBooks();
         res.status(200).json(books);
@@ -15,7 +15,7 @@ router.get('/books', auth, async function (req, res,next) {
     }
 });
 
-router.get('/books/:id', auth, async function (req, res,next) {
+router.get('/books/:id', auth, async (req, res,next) => {
     const idBook = req.params.id;
     try {
         const book = await booksService.getBook(idBook);
@@ -25,7 +25,7 @@ router.get('/books/:id', auth, async function (req, res,next) {
     }
 });
 
-router.post('/books', auth, async function (req, res,next) {
+router.post('/books', auth, async (req, res,next) => {
     const book = req.body;
     try {
         const newBook = await booksService.saveBook(book);
@@ -35,7 +35,7 @@ router.post('/books', auth, async function (req, res,next) {
     }
 });
 
-router.put('/books/:id', auth, async function (req, res,next) {
+router.put('/books/:id', auth, async (req, res,next) => {
     const book = req.body;
     try {
         await booksService.updateBook(req.params.id, book);
@@ -45,7 +45,7 @@ router.put('/books/:id', auth, async function (req, res,next) {
     }
 });
 
-router.patch('/books/:id', auth, async function (req, res,next) {
+router.patch('/books/:id', auth, async (req, res,next) => {
     const book = req.body;
     try {
         await booksService.updateRentedBook(req.params.id, book);
@@ -55,7 +55,7 @@ router.patch('/books/:id', auth, async function (req, res,next) {
     }
 });
 
-router.delete('/books/:id', auth, async function (req, res,next) {
+router.delete('/books/:id', auth, async (req, res,next) => {
     try {
         await booksService.deleteBook(req.params.id);
         res.status(204).end();
